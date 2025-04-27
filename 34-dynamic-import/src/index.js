@@ -10,12 +10,14 @@ const render = () => {
 
   if (hash === '#posts') {
     // mainElement.appendChild(posts())
-    import(/* webpackChunkName: 'components' */'./posts/posts').then(({ default: posts }) => {
+    // webpackChunkName 是魔法注释，用于动态导入(import())时指定生成的代码块的名称
+    // webpack会自动将 import() 动态引入的文件打成一个独立的bundle，用于动态加载，还会抽离公共代码
+    import(/* webpackChunkName: 'posts' */'./posts/posts').then(({ default: posts }) => {
       mainElement.appendChild(posts())
     })
   } else if (hash === '#album') {
     // mainElement.appendChild(album())
-    import(/* webpackChunkName: 'components' */'./album/album').then(({ default: album }) => {
+    import(/* webpackChunkName: 'album' */'./album/album').then(({ default: album }) => {
       mainElement.appendChild(album())
     })
   }
